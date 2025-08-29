@@ -2,9 +2,10 @@ terraform {
   required_providers {
     snowflake = {
       source  = "snowflakedb/snowflake"
-      version = "1.0.4"
+      version = "2.5.0"
     }
   }
+
 
   backend "s3" {
     bucket         = "<your-bucket-name>"
@@ -18,10 +19,10 @@ terraform {
 }
 
 provider "snowflake" {
-  username    = "<your_snowflake_username>"
-  account     = "<your_snowflake_account_identifier>"
-  role        = "<your_snowflake_role>"
-  private_key = var.snowflake_private_key
+  user         = var.snowflake_username
+  account_name = var.snowflake_account
+  role         = var.snowflake_role
+  private_key  = var.snowflake_private_key_path
 }
 
 module "snowflake_resources" {
