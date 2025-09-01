@@ -18,10 +18,16 @@ terraform {
 }
 
 provider "snowflake" {
-  user         = var.snowflake_username
-  account_name = var.snowflake_account_name
-  role         = var.snowflake_role
-  private_key  = var.snowflake_private_key_path
+  profile = "accountadmin"
+}
+
+
+provider "snowflake" {
+  user              = var.snowflake_username
+  account_name      = var.snowflake_account_name
+  organization_name = var.snowflake_organization_name
+  role              = var.snowflake_role
+  password          = var.password
 }
 
 module "snowflake_resources" {

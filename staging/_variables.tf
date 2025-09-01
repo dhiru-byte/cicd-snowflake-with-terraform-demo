@@ -8,15 +8,26 @@ variable "snowflake_account_name" {
   description = "Snowflake account identifier"
 }
 
+variable "snowflake_organization_name" {
+  type        = string
+  description = "Snowflake organization name"
+}
+
 variable "snowflake_role" {
   type        = string
   description = "Snowflake role"
 }
 
-variable "snowflake_private_key_path" {
+variable "password" {
   type        = string
-  description = "Path to the Snowflake private key file"
+  sensitive   = true
+  description = "Snowflake user password"
 }
+
+# variable "snowflake_private_key_path" {
+#   type        = string
+#   description = "Path to the Snowflake private key file"
+# }
 
 variable "database" {
   type    = string
