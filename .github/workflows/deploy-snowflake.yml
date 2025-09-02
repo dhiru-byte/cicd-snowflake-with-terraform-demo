@@ -13,8 +13,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Snowflake CLI
-        uses: snowflake-cli/setup-snowflake-cli@v1.0.0 # Example action
+      - name: Setup Snowflake cli
+        uses: snowflakedb/snowflake-cli-action@v2.0
+        with:
+          use-oidc: true
+          cli-version: "3.11"
+          
+      - name: test connection
+        env:
+          SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+        run: snow connection test -x
 
       - name: Connect and Deploy to Snowflake
         env:
