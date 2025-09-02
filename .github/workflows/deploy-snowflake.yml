@@ -1,0 +1,37 @@
+name: Deploy to Snowflake Free Trial
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Snowflake CLI
+        uses: snowflake-cli/setup-snowflake-cli@v1.0.0 # Example action
+
+      - name: Connect and Deploy to Snowflake
+        env:
+          SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+          SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+          SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+          SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
+          SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
+        run: |
+          snowflake_cli connection add --name my_connection \
+            --account ${{ env.SNOWFLAKE_ACCOUNT }} \
+            --user ${{ env.SNOWFLAKE_USER }} \
+            --password ${{ env.SNOWFLAKE_PASSWORD }} \
+            --warehouse ${{ env.SNOWFLAKE_WAREHOUSE }} \
+            --database ${{ env.SNOWFLAKE_DATABASE }} \
+            --role ${{ env.SNOWFLAKE_ROLE }}
+          
+          # Example: Execute a SQL script
+          snowflake_cli sql execute -c my_connection -f ./sql/deploy_objects.sql
