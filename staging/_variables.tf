@@ -24,17 +24,27 @@ variable "password" {
   description = "Snowflake user password"
 }
 
-# variable "snowflake_private_key_path" {
-#   type        = string
-#   description = "Path to the Snowflake private key file"
-# }
+# # variable "snowflake_private_key_path" {
+# #   type        = string
+# #   description = "Path to the Snowflake private key file"
+# # }
 
-variable "database" {
+variable "create_account_name" {
   type    = string
-  default = "TERRAFORM_DEMO_STAGING"
+  
 }
 
-variable "env_name" {
+variable "admin_name" {
   type    = string
-  default = "STAGING"
+}
+
+variable "admin_password" {
+  type    = string
+  sensitive = true
+}
+
+variable "email" {
+  type    = string
+  sensitive = true
+  
 }
