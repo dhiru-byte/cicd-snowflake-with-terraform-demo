@@ -29,12 +29,3 @@ variable "password" {
 #   description = "Path to the Snowflake private key file"
 # }
 
-variable "database" {
-  type    = string
-  default = "TERRAFORM_DEMO_STAGING"
-}
-
-variable "env_name" {
-  type    = string
-  default = "STAGING"
-}

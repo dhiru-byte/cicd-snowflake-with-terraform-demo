@@ -23,10 +23,11 @@ terraform {
 
 
 provider "snowflake" {
-  user              = "DHIRENDRA"              #var.snowflake_username
-  account_name      = "AP22595"                #var.snowflake_account_name
-  organization_name = "DNJNTIC"                #var.snowflake_organization_name
-  role              = "ACCOUNTADMIN"           #var.snowflake_role
-  password          = "Odin1234Ragnar"         #var.password
+  user              = var.snowflake_username
+  account_name      = var.snowflake_account_name
+  organization_name = var.snowflake_organization_name
+  role              = var.snowflake_role
+  password          = var.password
 }
+
 
